@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "251317506008",
+    "project_id": "mychat-2e9a5",
+    "storage_bucket": "mychat-2e9a5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:251317506008:android:64e491a35d2c7955ff2cad",
+        "android_client_info": {
+          "package_name": "com.passonatetech.mychat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "251317506008-70rf808epcvsvj9dosvh7vro838fgm1l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC20N-nF_E9VBsXxNgUyA2MaoPwLwnERf4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "251317506008-70rf808epcvsvj9dosvh7vro838fgm1l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
