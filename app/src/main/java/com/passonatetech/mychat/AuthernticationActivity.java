@@ -32,7 +32,7 @@ public class AuthernticationActivity extends AppCompatActivity {
         binding = ActivityAuthernticationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("users");
+        databaseReference = FirebaseDatabase.getInstance().getReference("users");
         binding.login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

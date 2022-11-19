@@ -7,6 +7,7 @@ public class UserModel {
     }
 
     public UserModel(String userId, String userName, String userEmail, String userPassword) {
+        super();
         this.userId = userId;
         this.userName = userName;
         this.userEmail = userEmail;

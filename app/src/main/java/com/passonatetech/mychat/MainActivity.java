@@ -29,8 +29,8 @@ UserAdapter userAdapter;
         setContentView(binding.getRoot());
 
         userAdapter = new UserAdapter(this);
-        binding.recycle.setAdapter(userAdapter);
-        binding.recycle.setLayoutManager(new LinearLayoutManager(this));
+        binding.recycler.setAdapter(userAdapter);
+        binding.recycler.setLayoutManager(new LinearLayoutManager(this));
 
         databaseReference = FirebaseDatabase.getInstance().getReference("users");
 
@@ -41,7 +41,7 @@ UserAdapter userAdapter;
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     String uid = dataSnapshot.getKey();
                     if (!uid.equals(FirebaseAuth.getInstance().getUid())) {
-                        UserModel userModel = dataSnapshot.child(uid).getValue(UserModel.class);
+                        UserModel userModel = dataSnapshot.getValue(UserModel.class);
                         userAdapter.add(userModel);
                     }
                 }
