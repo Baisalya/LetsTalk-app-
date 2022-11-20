@@ -11,17 +11,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 <RelativeLayout
-    android:padding="15dp"
+    android:padding="8dp"
     android:id="@+id/sendMessageLayout"
     android:layout_alignParentBottom="true"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <EditText
-        android:padding="15dp"
+        android:padding="12dp"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:id="@+id/messageEd"
         android:hint="Write message here"
+        android:background="@drawable/sendmessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <ImageView
@@ -29,7 +30,7 @@
         android:padding="15dp"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
-        android:src="@drawable/logout_image"
+        android:src="@drawable/send_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
