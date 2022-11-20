@@ -1,6 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">LetsTalk</string>
     <string name="user_email">Enter Your Email</string>
     <string name="name">Enter Your Name</string>
-    <string name="sign_up">Sign Up</string>
 </resources>
