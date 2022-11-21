@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,18 +40,18 @@ public class AuthernticationActivity extends AppCompatActivity {
                 //name=binding.name.getText().toString();
                 email = binding.email.getText().toString();
                 password = binding.password.getText().toString();
-
+                Toast.makeText(AuthernticationActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
                 login();
             }
         });
         binding.login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                name = binding.name.getText().toString();
+               // name = binding.name.getText().toString();
                 email = binding.email.getText().toString();
                 password = binding.password.getText().toString();
-
-                signUp();
+                Toast.makeText(AuthernticationActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
+                login();
             }
         });
     }
@@ -72,6 +73,7 @@ public class AuthernticationActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
+                        Toast.makeText(AuthernticationActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(AuthernticationActivity.this, MainActivity.class));
                         finish();
                     }
@@ -85,6 +87,7 @@ public class AuthernticationActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
+                        Toast.makeText(AuthernticationActivity.this, "SignUp Success", Toast.LENGTH_SHORT).show();
                         UserProfileChangeRequest userProfileChangeRequest = new UserProfileChangeRequest.Builder().setDisplayName(name).build();
                         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
                         firebaseUser.updateProfile(userProfileChangeRequest);

@@ -21,7 +21,7 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:id="@+id/messageEd"
-        android:hint="Write message here"
+        android:hint="@string/wmh"
         android:background="@drawable/sendmessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

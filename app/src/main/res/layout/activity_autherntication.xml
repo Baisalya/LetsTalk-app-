@@ -129,32 +129,35 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:weightSum="2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/signup"
-            android:gravity="center"
-            android:layout_marginRight="10dp"
-            android:text="Signup"
-            android:layout_weight="1"
-            android:background="@color/teal_700"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"/>
-        <TextView
+        <Button
             android:id="@+id/login"
             android:layout_marginLeft="10dp"
-            android:background="@color/teal_700"
+            android:background="@drawable/btn_style"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:gravity="center"
             android:text="Login"
             android:layout_weight="1"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"/>
+<Space
+    android:layout_width="10dp"
+    android:layout_height="30dp"/>
+        <Button
+            android:id="@+id/signup"
+            android:gravity="center"
+            android:layout_marginLeft="10dp"
+            android:text="Signup"
+            android:layout_weight="1"
+            android:background="@drawable/btn_style2"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:layout_width="match_parent"
             android:layout_height="48dp"/>
 </LinearLayout>
 
