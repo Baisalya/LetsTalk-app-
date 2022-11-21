@@ -39,7 +39,7 @@ MessageAdapter messageAdapter;
         binding.recycler.setAdapter(messageAdapter);
         binding.recycler.setLayoutManager(new LinearLayoutManager(this));
        databaseReferenceSender= FirebaseDatabase.getInstance().getReference("chats").child(senderRoom);
-       databaseReferenceReciever=FirebaseDatabase.getInstance().getReference("chats").child(senderRoom);
+       databaseReferenceReciever=FirebaseDatabase.getInstance().getReference("chats").child(receiverRoom);
 
        databaseReferenceSender.addValueEventListener(new ValueEventListener() {
            @Override

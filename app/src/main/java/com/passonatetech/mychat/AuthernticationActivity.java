@@ -44,14 +44,14 @@ public class AuthernticationActivity extends AppCompatActivity {
                 login();
             }
         });
-        binding.login.setOnClickListener(new View.OnClickListener() {
+        binding.signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // name = binding.name.getText().toString();
+                name = binding.name.getText().toString();
                 email = binding.email.getText().toString();
                 password = binding.password.getText().toString();
                 Toast.makeText(AuthernticationActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
-                login();
+                signUp();
             }
         });
     }
