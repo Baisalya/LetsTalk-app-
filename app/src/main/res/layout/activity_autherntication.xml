@@ -20,7 +20,8 @@
         android:layout_marginRight="25dp"
         android:layout_marginBottom="25dp"
         android:gravity="center"
-        android:text="@string/sign_up"
+        android:text="Let's Talk"
+        android:fontFamily="cursive"
         android:textColor="@android:color/background_light"
         android:textSize="35sp"
         android:textStyle="bold" />

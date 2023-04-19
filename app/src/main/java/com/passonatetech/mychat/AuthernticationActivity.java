@@ -2,15 +2,19 @@ package com.passonatetech.mychat;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -22,10 +26,8 @@ import com.passonatetech.mychat.databinding.ActivityAuthernticationBinding;
 import java.util.Locale;
 
 public class AuthernticationActivity extends AppCompatActivity {
-    ActivityAuthernticationBinding binding;
-
-    String name, email, password;
-    DatabaseReference databaseReference;
+    private ActivityAuthernticationBinding binding;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,24 +36,50 @@ public class AuthernticationActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         databaseReference = FirebaseDatabase.getInstance().getReference("users");
+
         binding.login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //name=binding.name.getText().toString();
-                email = binding.email.getText().toString();
-                password = binding.password.getText().toString();
-                Toast.makeText(AuthernticationActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
-                login();
+                String email = binding.email.getText().toString().trim();
+                String password = binding.password.getText().toString().trim();
+
+                if (TextUtils.isEmpty(email)) {
+                    binding.email.setError("Email is required");
+                    return;
+                }
+
+                if (TextUtils.isEmpty(password)) {
+                    binding.password.setError("Password is required");
+                    return;
+                }
+
+                login(email, password);
             }
         });
+
         binding.signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                name = binding.name.getText().toString();
-                email = binding.email.getText().toString();
-                password = binding.password.getText().toString();
-                Toast.makeText(AuthernticationActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
-                signUp();
+                String name = binding.name.getText().toString().trim();
+                String email = binding.email.getText().toString().trim();
+                String password = binding.password.getText().toString().trim();
+
+                if (TextUtils.isEmpty(name)) {
+                    binding.name.setError("Name is required");
+                    return;
+                }
+
+                if (TextUtils.isEmpty(email)) {
+                    binding.email.setError("Email is required");
+                    return;
+                }
+
+                if (TextUtils.isEmpty(password)) {
+                    binding.password.setError("Password is required");
+                    return;
+                }
+
+                signUp(name, email, password);
             }
         });
     }
@@ -59,42 +87,54 @@ public class AuthernticationActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (currentUser != null) {
             startActivity(new Intent(AuthernticationActivity.this, MainActivity.class));
             finish();
         }
     }
 
-
-    private void login() {
-        FirebaseAuth
-                .getInstance()
-                .signInWithEmailAndPassword(email.trim(), password)
+    private void login(String email, String password) {
+        FirebaseAuth.getInstance()
+                .signInWithEmailAndPassword(email, password)
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-                        Toast.makeText(AuthernticationActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(AuthernticationActivity.this, MainActivity.class));
                         finish();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Snackbar.make(binding.getRoot(), "Failed to login: " + e.getMessage(), Snackbar.LENGTH_LONG).show();
                     }
                 });
     }
 
-    private void signUp() {
-        FirebaseAuth
-                .getInstance()
-                .createUserWithEmailAndPassword(email.trim(), password)
+    private void signUp(String name, String email, String password) {
+        FirebaseAuth.getInstance()
+                .createUserWithEmailAndPassword(email, password)
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-                        Toast.makeText(AuthernticationActivity.this, "SignUp Success", Toast.LENGTH_SHORT).show();
                         UserProfileChangeRequest userProfileChangeRequest = new UserProfileChangeRequest.Builder().setDisplayName(name).build();
                         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
                         firebaseUser.updateProfile(userProfileChangeRequest);
-                        UserModel userModel = new UserModel(FirebaseAuth.getInstance().getUid(), name, email, password);
-                        databaseReference.child(FirebaseAuth.getInstance().getUid()).setValue(userModel);
+
+                        UserModel userModel = new UserModel(firebaseUser.getUid(), name, email, password);
+                        databaseReference.child(firebaseUser.getUid()).setValue(userModel);
+
                         startActivity(new Intent(AuthernticationActivity.this, MainActivity.class));
                         finish();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Snackbar.make(binding.getRoot(), "Failed to sign up: " + e.getMessage(), Snackbar.LENGTH_LONG).show();
                     }
                 });
     }
